@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Dancing Script', cursive;
+            background-color: #ffe6f0;
+            overflow-x: hidden;
+            color: #b30059;
+            text-align: center;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+        .carousel img {
+            flex: 0 0 100%;
+            width: auto;
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        .message {
+            margin: 20px auto;
+            padding: 20px;
+            font-size: 1.3em;
+            white-space: pre-wrap;
+            animation: fadeIn 3s ease-in-out;
+            max-width: 600px;
+            background: #fff0f5;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .counter {
+            font-size: 1.2em;
+            margin: 30px 0;
+        }
+        iframe {
+            border-radius: 12px;
+            margin: 30px 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/74KqkyHbpneHF6JT8EwUOO?utm_source=generator" width="90%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <div class="carousel">
+        <div class="carousel-track">
+            <img src="C:/Users/massi/Downloads/detalle_para_novia_FINAL/detalle_final/images/1.jpeg" alt="foto1" />
+            <img src="C:/Users/massi/Downloads/detalle_para_novia_FINAL/detalle_final/images/2.jpeg" alt="foto2" />
+            <img src="C:/Users/massi/Downloads/detalle_para_novia_FINAL/detalle_final/images/3.jpeg" alt="foto3" />
+            <img src="C:/Users/massi/Downloads/detalle_para_novia_FINAL/detalle_final/images/4.jpeg" alt="foto4" />
+            <img src="C:/Users/massi/Downloads/detalle_para_novia_FINAL/detalle_final/images/5.jpeg" alt="foto5" />
+        </div>
+    </div>
+
+    <div class="message">
+        Mi amor,<br><br>
+        Hoy se cumplen tres meses desde que empezamos este hermoso viaje juntos, desde aquel 18 de enero que marcó el inicio de algo tan especial. No puedo evitar sonreír al pensar en todo lo que hemos vivido en tan poco tiempo: los lugares que hemos recorrido, las risas que hemos compartido, cada abrazo, cada mirada…<br><br>
+        Cada momento contigo es un recuerdo que quiero guardar para siempre.<br><br>
+        Estar a tu lado me hace sentir en casa, sin importar dónde estemos. Tus palabras me calman, tus abrazos me sostienen, y tu amor me da una seguridad que nunca antes había sentido.<br><br>
+        Me haces querer ser mejor, crecer, soñar más alto… porque ahora todo lo quiero construir contigo.<br><br>
+        Gracias por cada paso, cada plan, cada locura y cada silencio compartido. Gracias por hacerme sentir tan amado, tan comprendido, tan feliz.<br><br>
+        Feliz aniversario, mi vida. Esto apenas comienza, y no sabes cuánto me emociona todo lo que nos espera.<br><br>
+        Contigo, siempre. ❤️
+    </div>
+
+    <div class="counter">
+        Tiempo contigo:<br>
+        <span id="timeTogether"></span>
+    </div>
+
+    <canvas class="hearts" id="heartCanvas"></canvas>
+
+    <script>
+        const startDate = new Date("2025-01-18T00:00:00");
+        function updateCounter() {
+            const now = new Date();
+            let diff = now - startDate;
+            let seconds = Math.floor(diff / 1000);
+            let minutes = Math.floor(seconds / 60);
+            let hours = Math.floor(minutes / 60);
+            let days = Math.floor(hours / 24);
+            let months = Math.floor(days / 30.44);
+
+            seconds %= 60;
+            minutes %= 60;
+            hours %= 24;
+            days %= 30.44;
+
+            document.getElementById("timeTogether").innerText =
+                `${months} meses, ${Math.floor(days)} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+        }
+        setInterval(updateCounter, 1000);
+
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        const hearts = [];
+
+        function Heart() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height - height;
+            this.size = Math.random() * 20 + 10;
+            this.speed = Math.random() * 2 + 1;
+            this.opacity = Math.random() * 0.5 + 0.5;
+            this.draw = function() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = '#ff4d94';
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2,
+                                  this.x - this.size, this.y + this.size / 3,
+                                  this.x, this.y + this.size);
+                ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3,
+                                  this.x + this.size / 2, this.y - this.size / 2,
+                                  this.x, this.y);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            };
+            this.update = function() {
+                this.y += this.speed;
+                if (this.y > height) {
+                    this.y = -this.size;
+                    this.x = Math.random() * width;
+                }
+            };
+        }
+
+        for (let i = 0; i < 100; i++) {
+            hearts.push(new Heart());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let heart of hearts) {
+                heart.update();
+                heart.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const track = document.querySelector('.carousel-track');
+
+        function changeImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        setInterval(changeImage, 5000);
+    </script>
+</body>
+</html>
